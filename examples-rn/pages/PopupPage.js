@@ -59,11 +59,12 @@ export default class Page extends Component<{}> {
     return (
       <View style={{ flex: 1 }}>
         <View style={{ padding: 15 }}>
-          <Button style={styles.mb} theme="primary" onClick={() => this.open('popTop')}>从上方弹出</Button>
-          <Button style={styles.mb} theme="primary" onClick={() => this.open('popBottom')}>从下方弹出</Button>
-          <Button style={styles.mb} theme="primary" onClick={() => this.open('popLeft')}>从左边弹出</Button>
-          <Button style={styles.mb} theme="primary" onClick={() => this.open('popRight')}>从右边弹出</Button>
+          <Button style={styles.mb} onClick={() => this.open('popTop')}>从上方弹出</Button>
+          <Button style={styles.mb} onClick={() => this.open('popBottom')}>从下方弹出</Button>
+          <Button style={styles.mb} onClick={() => this.open('popLeft')}>从左边弹出</Button>
+          <Button style={styles.mb} onClick={() => this.open('popRight')}>从右边弹出</Button>
         </View>
+
         <Popup
           direction="top"
           mask={false}
@@ -76,34 +77,38 @@ export default class Page extends Component<{}> {
             <Text style={{ color: '#fff', lineHeight: 40 }}>更新成功</Text>
           </View>
         </Popup>
+
         <Popup
           direction="bottom"
           visible={this.state.popBottom}
           onClose={() => console.log('关闭')}
           onMaskClick={() => this.close('popBottom')}
           style={styles.bottomStyle}>
-          <Button style={[styles.mb, { width: 120, marginTop: 15 }]} theme="primary" onClick={() => this.close('popBottom')}>
+          <Button style={[styles.mb, { width: 120, marginTop: 15 }]} onClick={() => this.close('popBottom')}>
             关闭弹层
           </Button>
         </Popup>
+
         <Popup
           direction="left"
           visible={this.state.popLeft}
           onMaskClick={() => this.close('popLeft')}
           style={styles.leftStyle}>
-          <Button style={[styles.mb, { width: 120, marginTop: 15 }]} theme="primary" onClick={() => this.close('popLeft')}>
+          <Button style={[styles.mb, { width: 120, marginTop: 15 }]} onClick={() => this.close('popLeft')}>
             关闭弹层
           </Button>
         </Popup>
+
         <Popup
           direction="right"
           visible={this.state.popRight}
           onMaskClick={() => this.close('popRight')}
           style={styles.rightStyle}>
-          <Button style={[styles.mb, { width: 120, marginTop: 15 }]} theme="primary" onClick={() => this.close('popRight')}>
+          <Button style={[styles.mb, { width: 120, marginTop: 15 }]} onClick={() => this.close('popRight')}>
             关闭弹层
           </Button>
         </Popup>
+
       </View>
     );
   }

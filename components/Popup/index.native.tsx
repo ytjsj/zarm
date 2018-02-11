@@ -106,7 +106,7 @@ export default class Popup extends PureComponent<PopupProps, any> {
     }
   }
 
-  leave = ({ animationDuration, visible, onClose }) => {
+  leave = ({ animationDuration, visible }) => {
     this.setState({
       // isPending: false,
       animationState: 'leave',
@@ -152,7 +152,7 @@ export default class Popup extends PureComponent<PopupProps, any> {
 
   onLayout = (e, direction, that) => {
     let directionStyle = {};
-    UIManager.measure(e.target, (x, y, width, height, pageX, pageY) => {
+    UIManager.measure(e.target, (_x, _y, width, height, _pageX, _pageY) => {
       if (direction === 'bottom' || direction === 'top') {
         directionStyle[direction] = -height;
       } else {
@@ -167,25 +167,22 @@ export default class Popup extends PureComponent<PopupProps, any> {
   }
 
   render() {
-    const {
-      direction,
-      styles,
-      children,
-      style,
-    } = this.props;
+    const { direction, styles, children, style } = this.props;
+    const { directionStyle, transfromStyle } = this.state;
 
     const popupCls = [
       styles!.wrapperStyle,
-      style,
       styles![`${direction}Wrapper`],
+      style,
     ] as ViewStyle;
 
     const invisibleStyle = [
       styles!.invisibleWrapper,
       styles![`${direction}Invisible`],
     ] as ViewStyle;
-    const { directionStyle, transfromStyle } = this.state;
-    let popUpStyle = [popupCls, directionStyle, transfromStyle];
+
+    const popUpStyle = [popupCls, directionStyle, transfromStyle];
+
     return (
       <View style={invisibleStyle}>
         <Animated.View style={popUpStyle} onLayout={(e) => this.onLayout(e, direction, this)}>
